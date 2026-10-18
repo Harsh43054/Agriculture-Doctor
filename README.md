@@ -1,5 +1,7 @@
 # Agriculture Doctor
 
+**Live app:** https://agriculture-doctor-omega.vercel.app
+
 A full-stack farming workspace built with **Next.js, TypeScript, Supabase, Gemini, and Open-Meteo**. It replaces the original static prototype's canned predictions and telemetry with authenticated records and external services.
 
 ## Features
@@ -49,7 +51,7 @@ The migration creates `scans`, `soil_readings`, `scan_usage`, a private `plant-i
 | `AI_GATEWAY_MODEL` | Gateway model; defaults to `google/gemini-2.5-flash` |
 | `VERCEL_OIDC_TOKEN` | Automatically supplied by Vercel; do not manually commit or copy it |
 
-A direct Gemini key takes precedence. Otherwise, the app uses Vercel AI Gateway with an explicit gateway key or the deployment's OIDC identity. Availability depends on the team's gateway access, model availability, and remaining credits. No paid credits are purchased by the application.
+A direct Gemini key takes precedence. Otherwise, the app uses Vercel AI Gateway with an explicit gateway key or the deployment's OIDC identity, resolved at request time using `@vercel/oidc`. Availability depends on the team's gateway access, model availability, and remaining credits. No paid credits are purchased by the application.
 
 ## Deploy on Vercel
 
