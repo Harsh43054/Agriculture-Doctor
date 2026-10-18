@@ -19,12 +19,26 @@ export const analysisSchema = z.object({
 });
 export type Analysis = z.infer<typeof analysisSchema>;
 export type SoilInput = z.infer<typeof soilSchema>;
-export type Scan = { id: string; field: string; crop_hint: string; result: Analysis; created_at: string; image_path: string; imageUrl?: string };
+export type Scan = {
+  id: string;
+  field: string;
+  crop_hint: string;
+  result: Analysis;
+  created_at: string;
+  image_path: string;
+  imageUrl?: string;
+};
 export type Soil = SoilInput & { id: string; created_at: string };
 export const MAX_IMAGE_BYTES = 3 * 1024 * 1024;
 
 export function imageSignature(bytes: Uint8Array): boolean {
-  return (bytes[0] === 0xff && bytes[1] === 0xd8 && bytes[2] === 0xff)
-    || (bytes[0] === 0x89 && bytes[1] === 0x50 && bytes[2] === 0x4e && bytes[3] === 0x47)
-    || (Buffer.from(bytes.slice(0, 4)).toString() === "RIFF" && Buffer.from(bytes.slice(8, 12)).toString() === "WEBP");
+  return (
+    (bytes[0] === 0xff && bytes[1] === 0xd8 && bytes[2] === 0xff) ||
+    (bytes[0] === 0x89 &&
+      bytes[1] === 0x50 &&
+      bytes[2] === 0x4e &&
+      bytes[3] === 0x47) ||
+    (Buffer.from(bytes.slice(0, 4)).toString() === "RIFF" &&
+      Buffer.from(bytes.slice(8, 12)).toString() === "WEBP")
+  );
 }
